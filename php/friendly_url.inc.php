@@ -56,6 +56,6 @@ function generate_seo_link($input,$replace = '-',$len=64,$remove_words = true) {
   }
   $return = str_replace(' ',$replace,$return);
   // Remove repeated $replace
-  $return = preg_replace("/\-+/i", "-", $return);
+  $return = preg_replace("/".preg_quote($replace)."+/i", $replace, $return); 
   return $return;
 }
