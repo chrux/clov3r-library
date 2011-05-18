@@ -54,5 +54,8 @@ function generate_seo_link($input,$replace = '-',$len=64,$remove_words = true) {
         $return_array[] = $word;
     $return = implode($replace,$return_array);
   }
-  return str_replace(' ',$replace,$return);
+  $return = str_replace(' ',$replace,$return);
+  // Remove repeated $replace
+  $return = preg_replace("/\-+/i", "-", $return);
+  return $return;
 }
