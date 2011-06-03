@@ -44,7 +44,7 @@ function generate_seo_link($input,$replace = '-',$len=64,$remove_words = true) {
   // First turn in low case the chars, second delete any chars that is not in a-z and 0-9
   // and - third, delete repeated whitespace in the string and , fourth delete whitespace at
   // the end and begin, fifth truncate string to $len
-  $return = substr(trim(preg_replace('/ +/',' ',preg_replace('/[^a-zA-Z0-9\-\s]/','',strtolower($return)))),0,$len);
+  $return = trim(preg_replace('/ +/',' ',preg_replace('/[^a-zA-Z0-9\-\s]/','',strtolower($return))));
   // Removing unnecessary words (duplicate and stop ones), words that aren't helpful to SEO
   if($remove_words) {
     $input_array = explode(' ',$return);
@@ -57,5 +57,7 @@ function generate_seo_link($input,$replace = '-',$len=64,$remove_words = true) {
   $return = str_replace(' ',$replace,$return);
   // Remove repeated $replace
   $return = preg_replace("/".preg_quote($replace)."+/i", $replace, $return); 
+  // Truncate string to $len
+  $return = substr($return,0,$len);
   return $return;
 }
